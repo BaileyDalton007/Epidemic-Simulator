@@ -1,10 +1,12 @@
 import sys
 from plot import MplCanvas
+from interface import controlGUI
 
 import matplotlib
 matplotlib.use('Qt5Agg')
 
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget, QPushButton, QTabWidget
 
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
@@ -17,29 +19,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
         sc = MplCanvas(self, width=5, height=4, dpi=200)
         sc.plot()
-
-        #toolbar = NavigationToolbar(sc, self)
-        #layout.addWidget(toolbar)
-
-        startButton = QtWidgets.QPushButton('Start Simulation', self)
-
-        buttonLayout = QtWidgets.QFormLayout()
         
-
-        buttonWidget = QtWidgets.QWidget()
-        buttonWidget.setLayout(buttonLayout)
-        buttonLayout.addWidget(startButton)
+        controlWidget = controlGUI(self)
 
         layout = QtWidgets.QHBoxLayout()
         layout.addWidget(sc)
-        layout.addWidget(buttonWidget)
+        layout.addWidget(controlWidget)
 
-        mainWidget = QtWidgets.QWidget()
+        mainWidget = QWidget()
         mainWidget.setLayout(layout)
         self.setCentralWidget(mainWidget)
 
         self.show()
-
 
 app = QtWidgets.QApplication(sys.argv)
 w = MainWindow()
