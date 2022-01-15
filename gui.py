@@ -1,5 +1,5 @@
 import sys
-from main import MplCanvas
+from plot import MplCanvas
 
 import matplotlib
 matplotlib.use('Qt5Agg')
@@ -13,18 +13,30 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
-        sc = MplCanvas(self, width=5, height=5, dpi=100)
+        self.resize(1600, 800)
+
+        sc = MplCanvas(self, width=5, height=4, dpi=200)
         sc.plot()
 
-        toolbar = NavigationToolbar(sc, self)
+        #toolbar = NavigationToolbar(sc, self)
+        #layout.addWidget(toolbar)
 
-        layout = QtWidgets.QVBoxLayout()
-        layout.addWidget(toolbar)
+        startButton = QtWidgets.QPushButton('Start Simulation', self)
+
+        buttonLayout = QtWidgets.QFormLayout()
+        
+
+        buttonWidget = QtWidgets.QWidget()
+        buttonWidget.setLayout(buttonLayout)
+        buttonLayout.addWidget(startButton)
+
+        layout = QtWidgets.QHBoxLayout()
         layout.addWidget(sc)
+        layout.addWidget(buttonWidget)
 
-        widget = QtWidgets.QWidget()
-        widget.setLayout(layout)
-        self.setCentralWidget(widget)
+        mainWidget = QtWidgets.QWidget()
+        mainWidget.setLayout(layout)
+        self.setCentralWidget(mainWidget)
 
         self.show()
 
