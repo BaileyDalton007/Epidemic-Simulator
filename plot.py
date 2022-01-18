@@ -4,6 +4,8 @@ from matplotlib.figure import Figure
 import numpy as np
 import pandas as pd
 
+from data import DataSet
+
 class MplCanvas(FigureCanvasQTAgg):
 
     def __init__(self, parent=None, width=5, height=4, dpi=100):
@@ -14,32 +16,23 @@ class MplCanvas(FigureCanvasQTAgg):
 
         np.random.seed(7)
 
-        self.population = 50
-        self.x, self.y = np.random.rand(2, self.population)
-        self.statusList = np.zeros((self.population,), dtype=int)
+        self.data = DataSet(7, 50) 
         self.colormap = np.array(['b', 'r'])
 
     def plot(self):
-        self.axes.scatter(self.x, self.y, c=self.colormap[self.statusList], picker=True);
-    
-    def printTable(self):
-        df = pd.DataFrame()
-        df['x'] = self.x.tolist()
-        df['y'] = self.y.tolist()
-        df['status'] = self.statusList.tolist()
-        print(df)
+        self.axes.scatter(self.data.x, self.data.y, c=self.colormap[self.data.statusList], picker=True);
 
     def on_pick(self, event):
         ind = event.ind
         
-        if self.statusList[ind].any() != 0:
-            self.statusList[ind] = 0
+        if self.data.statusList[ind].any() != 0:
+            self.data.statusList[ind] = 0
         else:
-            self.statusList[ind] = 1
+            self.data.statusList[ind] = 1
         self.updateGraph()
 
     def updateGraph(self):
         self.axes.cla()
-        self.axes.scatter(self.x, self.y, c=self.colormap[self.statusList], picker=True);
+        self.axes.scatter(self.data.x, self.data.y, c=self.colormap[self.data.statusList], picker=True);
         self.fig.canvas.mpl_connect('pick_event', self.on_pick)
         self.draw()
