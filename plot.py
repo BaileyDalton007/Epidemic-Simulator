@@ -14,9 +14,8 @@ class MplCanvas(FigureCanvasQTAgg):
         self.axes = self.fig.add_subplot(111)
         super(MplCanvas, self).__init__(self.fig)
 
-        np.random.seed(7)
+        self.data = DataSet(0, 0)
 
-        self.data = DataSet(7, 50) 
         self.colormap = np.array(['b', 'r'])
 
     def plot(self):

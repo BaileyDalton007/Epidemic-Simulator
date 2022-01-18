@@ -17,13 +17,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.resize(1600, 800)
 
-        sc = MplCanvas(self, width=5, height=4, dpi=200)
-        sc.plot()
+        plot = MplCanvas(self, width=5, height=4, dpi=200)
+        plot.plot()
         
-        controlWidget = controlGUI(self)
+        controlWidget = controlGUI(self, plot)
 
         layout = QtWidgets.QHBoxLayout()
-        layout.addWidget(sc)
+        layout.addWidget(plot)
         layout.addWidget(controlWidget)
 
         mainWidget = QWidget()

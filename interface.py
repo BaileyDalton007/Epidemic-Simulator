@@ -3,16 +3,18 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QIntValidator
 from PyQt5.QtWidgets import QWidget, QPushButton, QTabWidget, QGridLayout
 
+from data import DataSet
 class controlGUI(QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent, plotCanvas):
         super(QWidget, self).__init__(parent)
         self.mainLayout = QtWidgets.QVBoxLayout(self)
         
+        self.plotCanvas = plotCanvas
+
         # Initialize tab screen
         self.tabs = QTabWidget()
         self.dataTab = QWidget()
         self.tab2 = QWidget()
-        self.tabs.resize(300,200)
         
         # Add tabs
         self.tabs.addTab(self.dataTab,"Data")
@@ -25,6 +27,7 @@ class controlGUI(QWidget):
         self.seedWidget = seedWidget(self)
 
         self.genButton = QPushButton("Generate Population")
+        self.genButton.clicked.connect(self.generate)
 
         self.dataTab.layout.addLayout(self.sliderWidget.layout, 0, 0)
 
@@ -37,6 +40,10 @@ class controlGUI(QWidget):
         # Add tabs to widget
         self.mainLayout.addWidget(self.tabs)
         self.setLayout(self.mainLayout)
+
+    def generate(self):
+        self.plotCanvas.data = DataSet(self.seedWidget.seedInput.text(), self.sliderWidget.popSlider.value())
+        self.plotCanvas.updateGraph()
 
 
 class popSliderWidget(QWidget):
