@@ -8,7 +8,7 @@ from data import DataSet
 class DataTab(QWidget):
     def __init__(self, parent, plotCanvas):
         super(QWidget, self).__init__(parent)
-        self.layout = QGridLayout(self)
+        self.layout = QtWidgets.QVBoxLayout()
 
         self.plotCanvas = plotCanvas
 
@@ -17,10 +17,12 @@ class DataTab(QWidget):
 
         self.genButton = QPushButton("Generate Population")
         self.genButton.clicked.connect(self.generate)
+        
+        self.layout.addStretch(1)
+        self.layout.addLayout(self.sliderWidget.layout)
 
-        self.layout.addLayout(self.sliderWidget.layout, 0, 0)
-
-        self.layout.addLayout(self.seedWidget.layout, 1, 0)
+        self.layout.addLayout(self.seedWidget.layout)
+        self.layout.addStretch(1)
 
         self.layout.addWidget(self.genButton)
 
@@ -34,21 +36,30 @@ class DataTab(QWidget):
 class popSliderWidget(QWidget):
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
-        self.layout = QtWidgets.QHBoxLayout()
+        self.slider = QWidget
+        self.slider.layout = QtWidgets.QHBoxLayout()
 
-        self.popSlider = QtWidgets.QSlider(Qt.Horizontal)
-        self.popSlider.setFocusPolicy(Qt.StrongFocus)
-        self.popSlider.setTickPosition(QtWidgets.QSlider.TicksBothSides)
-        self.popSlider.setTickInterval(10)
-        self.popSlider.setSingleStep(1)
-        self.popSlider.valueChanged.connect(self.changed_slider)
+        self.slider.popSlider = QtWidgets.QSlider(Qt.Horizontal)
+        self.slider.popSlider.setFocusPolicy(Qt.StrongFocus)
+        self.slider.popSlider.setTickPosition(QtWidgets.QSlider.TicksBothSides)
+        self.slider.popSlider.setTickInterval(10)
+        self.slider.popSlider.setSingleStep(1)
+        self.slider.popSlider.valueChanged.connect(self.changed_slider)
 
-        self.sliderlabel = QtWidgets.QLabel("00")
-        self.sliderlabel.setFont(QFont("Sanserif", 10))
+        self.slider.sliderlabel = QtWidgets.QLabel("00")
+        self.slider.sliderlabel.setFont(QFont("Sanserif", 10))
 
-        self.layout.addWidget(self.sliderlabel)
-        self.layout.addWidget(self.popSlider)
+        self.slider.layout.addWidget(self.slider.sliderlabel)
+        self.slider.layout.addWidget(self.slider.popSlider)
 
+        # Layout of title and slider + value
+        self.layout = QtWidgets.QVBoxLayout()
+
+        self.title = QtWidgets.QLabel("Population")
+        self.title.setFont(QFont("Sanserif", 12))
+
+        self.layout.addWidget(self.title)
+        self.layout.addLayout(self.slider.layout)
 
     def changed_slider(self):
         value = self.popSlider.value()
@@ -60,7 +71,7 @@ class popSliderWidget(QWidget):
 class seedWidget(QWidget):
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
-        self.layout = QtWidgets.QGridLayout()
+        self.layout = QtWidgets.QHBoxLayout()
 
         self.seedLabel = QtWidgets.QLabel("Random Seed")
         self.seedLabel.setFont(QFont("Sanserif", 12))
@@ -69,7 +80,6 @@ class seedWidget(QWidget):
         self.seedInput.setFixedWidth(40)
         self.seedInput.setValidator(QIntValidator())
 
-        self.layout.addWidget(self.seedLabel, 0, 0)
-        self.layout.addWidget(self.seedInput, 0, 1)
-        self.layout.setAlignment(self.seedInput, Qt.AlignLeft)
-        self.layout.setHorizontalSpacing(0)
+        self.layout.addWidget(self.seedLabel)
+        self.layout.addWidget(self.seedInput)
+        self.layout.addStretch(1)
