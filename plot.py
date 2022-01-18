@@ -1,3 +1,5 @@
+import matplotlib as plt
+
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 
@@ -20,6 +22,8 @@ class MplCanvas(FigureCanvasQTAgg):
 
     def plot(self):
         self.axes.scatter(self.data.x, self.data.y, c=self.colormap[self.data.statusList], picker=True);
+        self.axes.xaxis.set_major_locator(plt.ticker.NullLocator())
+        self.axes.yaxis.set_major_locator(plt.ticker.NullLocator())
 
     def on_pick(self, event):
         ind = event.ind
@@ -33,5 +37,7 @@ class MplCanvas(FigureCanvasQTAgg):
     def updateGraph(self):
         self.axes.cla()
         self.axes.scatter(self.data.x, self.data.y, c=self.colormap[self.data.statusList], picker=True);
+        self.axes.xaxis.set_major_locator(plt.ticker.NullLocator())
+        self.axes.yaxis.set_major_locator(plt.ticker.NullLocator())
         self.fig.canvas.mpl_connect('pick_event', self.on_pick)
         self.draw()
