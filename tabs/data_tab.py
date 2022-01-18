@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QIntValidator
-from PyQt5.QtWidgets import QWidget, QPushButton, QTabWidget, QGridLayout
+from PyQt5.QtWidgets import QWidget, QPushButton, QGridLayout
 
 from data import DataSet
 
