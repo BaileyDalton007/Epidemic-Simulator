@@ -1,4 +1,5 @@
 import matplotlib as plt
+from matplotlib.pyplot import Circle
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
@@ -18,12 +19,22 @@ class MplCanvas(FigureCanvasQTAgg):
 
         self.data = DataSet(0, 0)
 
+        self.radius = 0.0
+
         self.colormap = np.array(['b', 'r'])
 
     def plot(self):
         self.axes.scatter(self.data.x, self.data.y, c=self.colormap[self.data.statusList], picker=True);
         self.axes.xaxis.set_major_locator(plt.ticker.NullLocator())
+        self.axes.set_xlim((0, 1))
         self.axes.yaxis.set_major_locator(plt.ticker.NullLocator())
+        self.axes.set_ylim((0, 1))
+
+    def drawCircles(self):
+        for i in range(len(self.data.statusList)):
+            if self.data.statusList[i] == 1:
+                self.axes.add_patch(Circle((self.data.x[i], self.data.y[i]), self.radius, color=self.colormap[1], fill = False))
+
 
     def on_pick(self, event):
         ind = event.ind
@@ -37,7 +48,10 @@ class MplCanvas(FigureCanvasQTAgg):
     def updateGraph(self):
         self.axes.cla()
         self.axes.scatter(self.data.x, self.data.y, c=self.colormap[self.data.statusList], picker=True);
+        self.drawCircles()
         self.axes.xaxis.set_major_locator(plt.ticker.NullLocator())
+        self.axes.set_xlim((0, 1))
         self.axes.yaxis.set_major_locator(plt.ticker.NullLocator())
+        self.axes.set_ylim((0, 1))
         self.fig.canvas.mpl_connect('pick_event', self.on_pick)
         self.draw()

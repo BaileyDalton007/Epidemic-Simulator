@@ -12,7 +12,7 @@ class controlGUI(QWidget):
         # Initialize tab screen
         self.tabs = QTabWidget()
         self.dataTab = DataTab(self, parent.plot)
-        self.diseaseTab = DiseaseTab(self)
+        self.diseaseTab = DiseaseTab(self, parent.plot)
         
         # Add tabs
         self.tabs.addTab(self.dataTab,"Data")

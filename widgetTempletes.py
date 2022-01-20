@@ -10,6 +10,8 @@ class SliderWidget(QWidget):
         self.slider = QWidget()
         self.slider.layout = QtWidgets.QHBoxLayout()
 
+        self.value = 0
+
         self.slider.sliderInput = QtWidgets.QSlider(Qt.Horizontal)
         self.slider.sliderInput.setFocusPolicy(Qt.StrongFocus)
         self.slider.sliderInput.setTickPosition(QtWidgets.QSlider.TicksBothSides)
