@@ -19,6 +19,7 @@ class DiseaseTab(QWidget):
 
         self.infectionLength = intInputWidget(self, "Infection Length")
         self.layout.addLayout(self.infectionLength.layout)
+        self.infectionLength.intInput.textChanged.connect(lambda: self.changeInfLength())
 
         self.contSlider = SliderWidget(self, "Rate of Infection")
         self.layout.addLayout(self.contSlider.layout)
@@ -38,3 +39,8 @@ class DiseaseTab(QWidget):
     
     def changeCont(self):
         self.simulation.contRate = self.contSlider.value * 0.01
+
+    def changeInfLength(self):
+        length = self.infectionLength.intInput.text()
+        if length != "":
+            self.simulation.infLength = int(length)

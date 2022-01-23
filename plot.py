@@ -41,8 +41,11 @@ class MplCanvas(FigureCanvasQTAgg):
         
         if self.data.statusList[ind].any() != 0:
             self.data.statusList[ind] = 0
+            self.data.infTime[ind] = 0
         else:
             self.data.statusList[ind] = 1
+            self.data.infTime[ind] = 1
+
         self.updateGraph()
 
     def updateGraph(self):
