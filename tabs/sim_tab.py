@@ -5,10 +5,12 @@ from widgetTempletes import SliderWidget, intInputWidget
 
 
 class SimulationTab(QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent, simulation):
         super(QWidget, self).__init__(parent)
-        self.layout = QtWidgets.QVBoxLayout()
 
+        self.simulation = simulation
+
+        self.layout = QtWidgets.QVBoxLayout()
         self.layout.addStretch(1)
 
         self.simLength = intInputWidget(self, "Days Of Simulation")
@@ -22,4 +24,4 @@ class SimulationTab(QWidget):
         self.setLayout(self.layout)
 
     def startSim(self):
-        pass
+        self.simulation.runSimulation(int(self.simLength.intInput.text()))

@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QTabWidget, QGridLayout
 
 from tabs.data_tab import DataTab
 from tabs.disease_tab import DiseaseTab
+from tabs.sim_tab import SimulationTab
 class controlGUI(QWidget):
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
@@ -13,10 +14,13 @@ class controlGUI(QWidget):
         self.tabs = QTabWidget()
         self.dataTab = DataTab(self, parent.plot)
         self.diseaseTab = DiseaseTab(self, parent.plot)
+        self.simTab = SimulationTab(self, parent.simulation)
+
         
         # Add tabs
         self.tabs.addTab(self.dataTab,"Data")
         self.tabs.addTab(self.diseaseTab,"Disease")
+        self.tabs.addTab(self.simTab,"Simulation")
 
         # Add tabs to widget
         self.mainLayout.addWidget(self.tabs)

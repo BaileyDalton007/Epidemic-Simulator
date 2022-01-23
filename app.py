@@ -1,6 +1,7 @@
 import sys
 from plot import MplCanvas
 from interface import controlGUI
+from simulation import Simulation
 
 import matplotlib
 matplotlib.use('Qt5Agg')
@@ -20,6 +21,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.plot = MplCanvas(self, width=5, height=4, dpi=200)
         self.plot.plot()
         
+        self.simulation = Simulation(self.plot)
+
         controlWidget = controlGUI(self)
 
         layout = QtWidgets.QHBoxLayout()
