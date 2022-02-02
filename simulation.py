@@ -10,8 +10,6 @@ class Simulation():
         # Amount of time a point will stay infected
         self.infLength = 1
 
-        # TODO check to make sure patient 0 is selected
-
     def runSimulation(self, simLength):
         radius = self.plotCanvas.radius
         for d in range(simLength):
@@ -21,6 +19,10 @@ class Simulation():
             day = self.plotCanvas.day
 
             infectedInd = np.where(data.statusList == 1)[0]
+            # checks to see if patient(s) zero is selected
+            if infectedInd.size == 0:
+                return -1
+
             non_infectedInd = np.where(data.statusList != 1)[0]
             for infected in infectedInd:
 
