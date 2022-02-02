@@ -19,6 +19,8 @@ class MplCanvas(FigureCanvasQTAgg):
 
         self.data = DataSet(0, 0)
 
+        self.day = 0
+
         self.radius = 0.0
 
         self.colormap = np.array(['b', 'r'])
@@ -41,10 +43,10 @@ class MplCanvas(FigureCanvasQTAgg):
         
         if self.data.statusList[ind].any() != 0:
             self.data.statusList[ind] = 0
-            self.data.infTime[ind] = 0
+            self.data.infTime[ind] = -1
         else:
             self.data.statusList[ind] = 1
-            self.data.infTime[ind] = 1
+            self.data.infTime[ind] = self.day
 
         self.updateGraph()
 

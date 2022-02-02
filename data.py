@@ -12,7 +12,7 @@ class DataSet:
         self.population = pop
         self.x, self.y = np.random.rand(2, self.population)
         self.statusList = np.zeros((self.population,), dtype=int)
-        self.infTime = np.zeros((self.population,), dtype=int)
+        self.infTime = np.full((self.population), -1)
 
     def printTable(self):
         df = pd.DataFrame()

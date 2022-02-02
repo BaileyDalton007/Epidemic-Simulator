@@ -10,24 +10,23 @@ class Simulation():
         # Amount of time a point will stay infected
         self.infLength = 1
 
-        # Keep track of day counts between runSim method calls
-        self.currDay = 0
         # TODO check to make sure patient 0 is selected
 
     def runSimulation(self, simLength):
         radius = self.plotCanvas.radius
-
         for d in range(simLength):
-            # day count is 1 based
-            day = d + self.currDay
             data = self.plotCanvas.data
+        
+            self.plotCanvas.day += 1
+            day = self.plotCanvas.day
 
             infectedInd = np.where(data.statusList == 1)[0]
             non_infectedInd = np.where(data.statusList != 1)[0]
-            
             for infected in infectedInd:
-                if (day - data.infTime[infected]) > self.infLength:
+
+                if (data.infTime[infected] != -1) and (day - data.infTime[infected] > self.infLength):
                     self.plotCanvas.data.statusList[infected] = 0
+                    self.plotCanvas.data.infTime[infected] = -1
                 else:
                     currInfected = (data.x[infected], data.y[infected])
                     for non_infected in non_infectedInd:
@@ -42,7 +41,7 @@ class Simulation():
                                 self.plotCanvas.data.statusList[non_infected] = 1
                                 self.plotCanvas.data.infTime[non_infected] = day
                 self.plotCanvas.updateGraph()
-        self.currDay += simLength
+
 
 def distance(p1, p2):
     distance = math.sqrt( ((p1[0]-p2[0])**2) + ((p1[1]-p2[1])**2) )
