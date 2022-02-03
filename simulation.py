@@ -12,7 +12,6 @@ class Simulation():
         # rate of death over infection period
         self.mortRate = 0.00
 
-# TODO if no day input, send error message
     def runSimulation(self, simLength):
         radius = self.plotCanvas.radius
         for d in range(simLength):

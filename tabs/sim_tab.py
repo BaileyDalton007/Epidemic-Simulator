@@ -30,7 +30,13 @@ class SimulationTab(QWidget):
         self.setLayout(self.layout)
 
     def startSim(self):
-        if self.simulation.runSimulation(int(self.simLength.intInput.text())) == -1:
-            self.notiflabel.setText("Please Click a Point to Start Infection")
+        if self.simLength.intInput.text() == "":
+            self.notiflabel.setText("Please Specify Length of Simulation")
         else:
             self.notiflabel.setText("")
+            
+            simLength = int(self.simLength.intInput.text())
+            if self.simulation.runSimulation(simLength) == -1:
+                self.notiflabel.setText("Please Click a Point to Start Infection")
+            else:
+                self.notiflabel.setText("")
