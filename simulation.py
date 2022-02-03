@@ -44,19 +44,23 @@ class Simulation():
 
                         dist = distance(currInfected, currnon_Infected)
                         if (dist <= radius):
-
-                            # will randomly infect points within the radius at the infection rate
-                            infChance = np.random.uniform(low=0, high=1)
-                            if (infChance <= self.contRate):
-                                self.plotCanvas.data.statusList[non_infected] = 1
-                                self.plotCanvas.data.infTime[non_infected] = day
+                            self.infChance(non_infected, day)
+                            
                 self.plotCanvas.updateGraph()
     
+    # will randomly kill points within the radius at the mortality rate
     def deathChance(self, i):
         deathChance = np.random.uniform(low=0, high=1)
-        if (deathChance <= self.mortRate):
+        if deathChance <= (self.mortRate):
             self.plotCanvas.data.statusList[i] = 2
             self.plotCanvas.data.infTime[i] = -1
+
+    # will randomly infect points within the radius at the infection rate
+    def infChance(self, i, day):
+        infChance = np.random.uniform(low=0, high=1)
+        if (infChance <= self.contRate):
+            self.plotCanvas.data.statusList[i] = 1
+            self.plotCanvas.data.infTime[i] = day
 
 
 def distance(p1, p2):
