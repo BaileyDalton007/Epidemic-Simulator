@@ -23,7 +23,7 @@ class MplCanvas(FigureCanvasQTAgg):
 
         self.radius = 0.0
 
-        self.colormap = np.array(['b', 'r'])
+        self.colormap = np.array(['b', 'r', '#808080'])
 
     def plot(self):
         self.axes.scatter(self.data.x, self.data.y, c=self.colormap[self.data.statusList], picker=True);
@@ -41,10 +41,11 @@ class MplCanvas(FigureCanvasQTAgg):
     def on_pick(self, event):
         ind = event.ind
         
-        if self.data.statusList[ind].any() != 0:
+        if self.data.statusList[ind].any() == 1:
             self.data.statusList[ind] = 0
             self.data.infTime[ind] = -1
-        else:
+            
+        elif self.data.statusList[ind].any() == 0:
             self.data.statusList[ind] = 1
             self.data.infTime[ind] = self.day
 

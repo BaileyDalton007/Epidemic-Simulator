@@ -28,6 +28,8 @@ class DiseaseTab(QWidget):
         
         self.mortSlider = SliderWidget(self, "Mortality Rate")
         self.layout.addLayout(self.mortSlider.layout)
+        self.mortSlider.slider.sliderInput.valueChanged.connect(lambda: self.changeMort())
+
         self.layout.addStretch(1)
 
         self.setLayout(self.layout)
@@ -44,3 +46,6 @@ class DiseaseTab(QWidget):
         length = self.infectionLength.intInput.text()
         if length != "":
             self.simulation.infLength = int(length)
+
+    def changeMort(self):
+        self.simulation.mortRate = self.mortSlider.value * 0.01
