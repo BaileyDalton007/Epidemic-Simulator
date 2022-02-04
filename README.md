@@ -8,7 +8,10 @@ A graphical interface to simulate epidemic outbreaks in a closed population thro
 
 ## Installation
 
+### Run as an Executable
+Download the .zip from releases, and run ```EpidemicSimulator.exe```
 
+### Run as a Python Script
 Clone the repository and run ```app.py```
 ## Usage
 
@@ -50,7 +53,7 @@ Save Current Simulation as CSV saves the data of the current run of the simulati
 
 
 ## Output Data
-After a simulation is saved, it will be output as a CSV file that can be analyzed with other data visualization tools. Below is raw output data.
+After a simulation is saved, it will be output as a CSV file in the same directory as the .exe that can be analyzed with other data visualization tools. Below is raw output data.
 
 ![image](https://user-images.githubusercontent.com/59097689/152485885-7710ccca-f1e0-43ce-ba66-b6bef511ef99.png)
 
