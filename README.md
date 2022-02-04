@@ -25,7 +25,7 @@ To select a patient zero, click on a healthy point in the population, and they w
 
 Under the ```Data``` tab are the controls to generate population sets.   
 The population slider determines the size of the population.
-The random seed input takes an integer and uses it as a seed to produce the random positions of the points with ```np.random.seed()```. This allows for population reproducibility for population and seed are the same. If no seed is input the default value is 0
+The random seed input takes an integer and uses it as a seed to produce the random positions of the points with ```np.random.seed()```. This allows for population reproducibility if population and seed are the same. If no seed is input the default value is 0
 
 ![image](https://user-images.githubusercontent.com/59097689/152482746-68431e60-e42b-45b5-a199-6dfb24a40091.png)
 
@@ -33,7 +33,7 @@ The random seed input takes an integer and uses it as a seed to produce the rand
 
 Under the ```Disease``` tab are the controls to modify the properties of the disease itself.   
 The spread radius is the distance from an infected point where the disease can be spread and is visualized with the red circle displayed around infected points in the population viewer. The default value is zero.   
-Infection length is the length of simulation days that an infection will last. After being infected, a point will stay infected for the time specified and will return to being healthy after, if still living. The Default value is 1 day.    
+Infection length is the length of simulation days that an infection will last. After being infected, a point will stay infected for the time specified and will return to being healthy after, if still living. The default value is 1 day.    
 The rate of infection is the chance that a point within the spread radius will become infected. On a day-by-day basis and will compound if a healthy point is within the spread radii of multiple infected points.   
 The mortality rate is the chance that an infected point will die. Also works on a day-by-day basis.
 
@@ -50,12 +50,12 @@ Save Current Simulation as CSV saves the data of the current run of the simulati
 
 
 ## Output Data
-After a simulation is saved, it will be output as a CSV file that can be analyzed will other data visualization tools. Below is raw output data.
+After a simulation is saved, it will be output as a CSV file that can be analyzed with other data visualization tools. Below is raw output data.
 
 ![image](https://user-images.githubusercontent.com/59097689/152485885-7710ccca-f1e0-43ce-ba66-b6bef511ef99.png)
 
 ```(x, y)``` is the randomly generated position for each point from 0 to 1.   
-```Status``` is an array of a point's status of each day simulated. 0 - healthy; 1 - infected; 2 - dead.   
+```Status``` is an array of a point's status for each day simulated. 0 - healthy; 1 - infected; 2 - dead.   
 ```InfTime``` is the array of a point's history of the day in which it was infected. A value of -1 means that the point is not currently infected.
 
 ## Future Work
