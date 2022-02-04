@@ -43,12 +43,15 @@ class MplCanvas(FigureCanvasQTAgg):
         
         if self.data.statusList[ind].any() == 1:
             self.data.statusList[ind] = 0
+
             self.data.infTime[ind] = -1
             
         elif self.data.statusList[ind].any() == 0:
             self.data.statusList[ind] = 1
+
             self.data.infTime[ind] = self.day
 
+        self.data.plotHistory()
         self.updateGraph()
 
     def updateGraph(self):

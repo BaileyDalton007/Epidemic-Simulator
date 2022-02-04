@@ -34,7 +34,6 @@ class Simulation():
                     self.plotCanvas.data.infTime[infected] = -1
 
                 else:
-                    # TODO mortality rate / inflen on inf points
                     self.deathChance(infected)
 
                     currInfected = (data.x[infected], data.y[infected])
@@ -46,6 +45,7 @@ class Simulation():
                             self.infChance(non_infected, day)
                             
                 self.plotCanvas.updateGraph()
+            self.plotCanvas.data.updateHistory()
     
     # will randomly kill points within the radius at the mortality rate
     def deathChance(self, i):
