@@ -7,7 +7,8 @@ import matplotlib
 matplotlib.use('Qt5Agg')
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QWidget, QPushButton, QTabWidget
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtGui import QIcon
 
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
@@ -15,6 +16,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def __init__(self):
         super(MainWindow, self).__init__()
+
+        self.setWindowTitle("Epidemic Simulator")
+        self.setWindowIcon(QIcon("virus.png"))
 
         self.resize(1600, 800)
 
