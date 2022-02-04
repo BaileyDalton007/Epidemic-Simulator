@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from csvGenerator import writeCSV
 
 class DataSet:
     def __init__(self, seed, pop):
@@ -22,3 +23,13 @@ class DataSet:
         df['infTime'] = self.infTime.tolist()
 
         print(df)
+
+    def saveData(self):
+        df = pd.DataFrame()
+        df['x'] = self.x.tolist()
+        df['y'] = self.y.tolist()
+        df['status'] = self.statusList.tolist()
+        df['infTime'] = self.infTime.tolist()
+
+        writeCSV(df)
+

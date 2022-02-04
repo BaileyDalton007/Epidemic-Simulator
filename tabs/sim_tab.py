@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QWidget, QPushButton
 from PyQt5.QtGui import QFont, QIntValidator
+from simulation import Simulation
 from widgetTempletes import SliderWidget, intInputWidget
 
 
@@ -27,6 +28,11 @@ class SimulationTab(QWidget):
         self.startButton = QPushButton("Start Simulation")
         self.startButton.clicked.connect(self.startSim)
         self.layout.addWidget(self.startButton)
+
+        self.csvButton = QPushButton("Save Current Simulation as CSV")
+        self.csvButton.clicked.connect(self.saveSim)
+        self.layout.addWidget(self.csvButton)
+
         self.setLayout(self.layout)
 
     def startSim(self):
@@ -40,3 +46,6 @@ class SimulationTab(QWidget):
                 self.notiflabel.setText("Please Click a Point to Start Infection")
             else:
                 self.notiflabel.setText("")
+
+    def saveSim(self):
+        self.simulation.saveSim()
